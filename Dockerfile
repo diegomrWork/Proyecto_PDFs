@@ -32,7 +32,12 @@ RUN composer install --optimize-autoloader --no-dev
 RUN npm install
 RUN npm run build
 
-# 5. Permisos de escritura para los PDFs temporales
-RUN chown -R www-data:www-data storage bootstrap/cache
+# 5. Crear carpetas temporales obligatorias y dar permisos
+RUN mkdir -p storage/framework/views \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/logs \
+    bootstrap/cache
 
-EXPOSE 80
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache
