@@ -566,27 +566,30 @@ const generarPdf = async () => {
 };
 
 const buscarDocumento = async (entidad, campoDoc, campoTipo, campoNombre) => {
-    const tipo = entidad[campoTipo]; // Ej: 'DNI' o 'RUC'
-    const doc = entidad[campoDoc];   // Ej: '12345678'
+    const tipo = entidad[campoTipo];
+    const doc = entidad[campoDoc];
 
-    // 1. Si es DNI y tiene 8 dígitos
     if (tipo === 'DNI' && doc && doc.length === 8) {
         try {
+            // Llama a tu propia ruta de Laravel, esquivando el bloqueo de seguridad
             const respuesta = await axios.get(`/consultar-dni/${doc}`);
-            if (respuesta.data.success) {
+            if (respuesta.data && respuesta.data.success) {
                 const datos = respuesta.data.data;
                 entidad[campoNombre] = `${datos.nombres} ${datos.apellido_paterno} ${datos.apellido_materno}`;
             }
-        } catch (error) { console.error("Error al buscar DNI"); }
+        } catch (error) { 
+            console.error("Error al buscar DNI:", error); 
+        }
     }
-    // 2. Si es RUC y tiene 11 dígitos
     else if (tipo === 'RUC' && doc && doc.length === 11) {
         try {
             const respuesta = await axios.get(`/consultar-ruc/${doc}`);
-            if (respuesta.data.success) {
+            if (respuesta.data && respuesta.data.success) {
                 entidad[campoNombre] = respuesta.data.data.nombre_o_razon_social;
             }
-        } catch (error) { console.error("Error al buscar RUC"); }
+        } catch (error) { 
+            console.error("Error al buscar RUC:", error); 
+        }
     }
 };
 </script>
