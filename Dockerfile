@@ -19,6 +19,7 @@ RUN echo "<VirtualHost *:80>\n\
         Options Indexes FollowSymLinks\n\
         AllowOverride All\n\
         Require all granted\n\
+        FallbackResource /index.php\n\
     </Directory>\n\
 </VirtualHost>" > /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
