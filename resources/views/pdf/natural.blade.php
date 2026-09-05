@@ -58,8 +58,8 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510 y/o <span class='bold'>LISBETH DURAND VARGAS</span>, con DNI N° 40058255";
             $oficinaRegistral = "TRUJILLO";
             $zonaRegistral = "ZONA REGISTRAL V SEDE TRUJILLO";
-            $apoderadosRegistral = "la Sra. <span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, identificada con DNI 44550672 y/o a <span class='bold'>ANTHONY GABRIEL QUISPE CHAVEZ</span> identificado con DNI N° 70468745";
-            $apoderadosAAP = "la Sra. <span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, identificada con DNI N° 44550672, y/o <span class='bold'>ANTHONY GABRIEL QUISPE CHAVEZ</span> identificado con DNI N° 70468745";
+            $apoderadosRegistral = "la Sra. <span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, identificada con DNI 44550672 y/o a <span class='bold'>ANTHONY GABRIEL QUISPE CHAVEZ</span> identificado con DNI N° 70468745, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "la Sra. <span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, identificada con DNI N° 44550672, y/o <span class='bold'>ANTHONY GABRIEL QUISPE CHAVEZ</span> identificado con DNI N° 70468745, y/o a __________________________________________ con DNI N° __________________________________________";
         
         } elseif ($ciudadEvaluada === 'HUAMACHUCO') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510 y/o <span class='bold'>LISBETH DURAND VARGAS</span>, con DNI N° 40058255";
@@ -238,7 +238,7 @@
     <p>Muy señores nuestros.</p>
 
     <div style="text-align: justify">
-        <p>Yo, <span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span> identificado con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}, Otorgo amplio poder a {!! $apoderadosRegistral !!}, para que en mi representación realice los trámites para la Inmatriculación del Vehículo con Nº de Chasis: {{ empty($datos['vehiculo']['serie_chasis']) ? '__________________' : $datos['vehiculo']['serie_chasis'] }} y Nº de Motor: {{ empty($datos['vehiculo']['motor']) ? '__________________' : $datos['vehiculo']['motor'] }}, así como para que suscriba el Formato de Inmatriculación, Formato Notarial de Cambio de Características, Declaración de Tipo de Uso y cualquier documento que sea necesario para tal fin.</p>
+        <p>Yo, <span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span> identificado con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}, Otorgo amplio poder a {!! $apoderadosRegistral !!}, para que en mi representación realice los trámites para la Inmatriculación del Vehículo con Nº de Chasis: {{ empty($datos['vehiculo']['serie_chasis']) ? '____________________________________' : $datos['vehiculo']['serie_chasis'] }} y Nº de Motor: {{ empty($datos['vehiculo']['motor']) ? '____________________________________' : $datos['vehiculo']['motor'] }}, así como para que suscriba el Formato de Inmatriculación, Formato Notarial de Cambio de Características, Declaración de Tipo de Uso y cualquier documento que sea necesario para tal fin.</p>
     </div>
 
     <div style="text-align: justify">
