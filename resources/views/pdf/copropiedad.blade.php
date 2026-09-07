@@ -110,15 +110,15 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARIO ALBERTO OLORTIGA ESQUIVEL</span>, con DNI N° 46907962, y/o <span class='bold'>CESAR EDUARDO CUBAS MONTENEGRO</span>, con DNI N° 40640963, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
             $oficinaRegistral = "TRUJILLO";
             $zonaRegistral = "ZONA REGISTRAL V SEDE TRUJILLO";
-            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificada con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificada con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificada con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificada con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificada con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificada con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificado con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificado con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificado con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificado con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
 
         } elseif ($ciudadEvaluada === 'TUMBES') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARIO ALBERTO OLORTIGA ESQUIVEL</span>, con DNI N° 46907962, y/o <span class='bold'>CESAR EDUARDO CUBAS MONTENEGRO</span>, con DNI N° 40640963, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
             $oficinaRegistral = "TRUJILLO";
             $zonaRegistral = "ZONA REGISTRAL V SEDE TRUJILLO";
-            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificada con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificada con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificada con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificada con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificada con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificada con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificado con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificado con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificado con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificado con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
         } else {
             $itfNormalCiudad = "<span class='bold'>[FALTA CONFIGURAR]</span>";
             $oficinaRegistral = strtoupper($datos['ciudad']);
@@ -167,12 +167,12 @@
         $estadosCiviles = [];
         
         foreach($datos['copropiedad']['lista'] as $prop) {
-            $compradores[] = "<span class='uppercase bold'>" . $prop['nombre'] . "</span> identificado con " . $prop['tipo_doc'] . " N° " . $prop['dni'];
-            $nombresCertifico[] = strtoupper($prop['nombre']) . " IDENTIFICADO CON " . $prop['tipo_doc'] . " " . $prop['dni'];
+            $compradores[] = "<span class='uppercase bold'>" . $prop['nombre'] . "</span> identificado(a) con " . $prop['tipo_doc'] . " N° " . $prop['dni'];
+            $nombresCertifico[] = strtoupper($prop['nombre']) . " IDENTIFICADO(A) CON " . $prop['tipo_doc'] . " " . $prop['dni'];
             
-            $txtEstado = "el estado civil de " . strtoupper($prop['nombre']) . " es " . strtoupper($prop['estado_civil']);
+            $txtEstado = "el estado civil de " . strtoupper($prop['nombre']) . " es " . strtoupper($prop['estado_civil']). "(A)";
             if($prop['estado_civil'] === 'CASADO') {
-                $txtEstado .= ", con " . strtoupper($prop['nombre_conyuge']) . ", identificado con " . $prop['tipo_doc_conyuge'] . " N° " . $prop['dni_conyuge'];
+                $txtEstado .= ", con " . strtoupper($prop['nombre_conyuge']) . ", identificado(a) con " . $prop['tipo_doc_conyuge'] . " N° " . $prop['dni_conyuge'];
             }
             $estadosCiviles[] = $txtEstado;
         }
