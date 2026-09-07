@@ -109,8 +109,8 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARIO ALBERTO OLORTIGA ESQUIVEL</span>, con DNI N° 46907962, y/o <span class='bold'>CESAR EDUARDO CUBAS MONTENEGRO</span>, con DNI N° 40640963, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
             $oficinaRegistral = "TRUJILLO";
             $zonaRegistral = "ZONA REGISTRAL V SEDE TRUJILLO";
-            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificada con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificada con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificada con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificada con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificada con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificada con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificado con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificado con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "el Sr. <span class='bold'>MANUEL JESUS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o al Sr. <span class='bold'>KEVIN DAVID PAJUELO RIOS</span>, identificado con DNI 75056101, y/o al Sr. <span class='bold'>WILFREDO PICHEN PRETEL</span>, identificado con DNI 46232456, y/o a __________________________________________ con DNI N° __________________________________________";
 
         } elseif ($ciudadEvaluada === 'TUMBES') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARIO ALBERTO OLORTIGA ESQUIVEL</span>, con DNI N° 46907962, y/o <span class='bold'>CESAR EDUARDO CUBAS MONTENEGRO</span>, con DNI N° 40640963, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
@@ -174,7 +174,7 @@
         <p>{!! $textoVendedorITF !!}</p>
     </div>
 
-    <p>El Comprador, <span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span> identificado con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}.</p>
+    <p>El Comprador, <span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span> identificado(a) con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}.</p>
 
     <p>Declaran que la venta de una Vehículo; marca <span class="uppercase">{{ $datos['vehiculo']['marca'] }}</span>, Modelo <span class="uppercase">{{ $datos['vehiculo']['modelo'] }}</span>; se realizó de acuerdo como se detalla a continuación:</p>
 
@@ -243,11 +243,11 @@
     <p>Muy señores nuestros.</p>
 
     <div style="text-align: justify">
-        <p>Yo, <span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span> identificado con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}, Otorgo amplio poder a {!! $apoderadosRegistral !!}, para que en mi representación realice los trámites para la Inmatriculación del Vehículo con Nº de Chasis: {{ empty($datos['vehiculo']['serie_chasis']) ? '____________________________________' : $datos['vehiculo']['serie_chasis'] }} y Nº de Motor: {{ empty($datos['vehiculo']['motor']) ? '____________________________________' : $datos['vehiculo']['motor'] }}, así como para que suscriba el Formato de Inmatriculación, Formato Notarial de Cambio de Características, Declaración de Tipo de Uso y cualquier documento que sea necesario para tal fin.</p>
+        <p>Yo, <span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span> identificado(a) con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}, Otorgo amplio poder a {!! $apoderadosRegistral !!}, para que en mi representación realice los trámites para la Inmatriculación del Vehículo con Nº de Chasis: {{ empty($datos['vehiculo']['serie_chasis']) ? '____________________________________' : $datos['vehiculo']['serie_chasis'] }} y Nº de Motor: {{ empty($datos['vehiculo']['motor']) ? '____________________________________' : $datos['vehiculo']['motor'] }}, así como para que suscriba el Formato de Inmatriculación, Formato Notarial de Cambio de Características, Declaración de Tipo de Uso y cualquier documento que sea necesario para tal fin.</p>
     </div>
 
     <div style="text-align: justify">
-        <p>Asimismo, declaro que mi estado civil es {{ strtoupper($datos['natural']['estado_civil']) }}@if($datos['natural']['estado_civil'] === 'CASADO'), con la persona <span class="uppercase bold">{{ $datos['natural']['nombre_conyuge'] }}</span> identificado(a) con {{ $datos['natural']['tipo_doc_conyuge'] }} N° {{ $datos['natural']['dni_conyuge'] }}@endif, y con domicilio en {{ strtoupper($datos['natural']['domicilio']) }}.</p>
+        <p>Asimismo, declaro que mi estado civil es {{ strtoupper($datos['natural']['estado_civil']) }}(A)@if($datos['natural']['estado_civil'] === 'CASADO'), con la persona <span class="uppercase bold">{{ $datos['natural']['nombre_conyuge'] }}</span> identificado(a) con {{ $datos['natural']['tipo_doc_conyuge'] }} N° {{ $datos['natural']['dni_conyuge'] }}@endif, y con domicilio en {{ strtoupper($datos['natural']['domicilio']) }}.</p>
     </div>
 
     <p>Sin otro particular, quedamos de Uds.</p>
@@ -283,7 +283,7 @@
     <p>Muy señores nuestros.</p>
 
     <div style="text-align: justify">
-        <p><span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span>, identificado con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }} otorgo amplio poder a {!! $apoderadosAAP !!}, para que en mi representación realicen los trámites para el recojo de la placa N° .........................</p>
+        <p><span class="uppercase bold">{{ $datos['natural']['nombre'] }}</span>, identificado(a) con {{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }} otorgo amplio poder a {!! $apoderadosAAP !!}, para que en mi representación realicen los trámites para el recojo de la placa N° .........................</p>
     </div>
 
     <p>Sin otro particular, quedamos de Uds.</p>
