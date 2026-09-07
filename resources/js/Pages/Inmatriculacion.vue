@@ -46,7 +46,7 @@
                             required 
                         />
                     </div>
-                    
+
                     <!-- 3. TIPO DE CLIENTE -->
                     <div class="mb-6">
                         <label class="block text-gray-700 font-bold mb-2">Tipo de Cliente:</label>
@@ -204,7 +204,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="block text-gray-700">Domicilio (Colocar ubigeo DEPARTAMENTO - PROVINCIA - DISTRITO):</label>
+                            <label class="block text-gray-700">Domicilio: DIRECCIÓN + UBIGEO(DEPARTAMENTO - PROVINCIA - DISTRITO)</label>
                             <input type="text" v-model="form.natural.domicilio" class="w-full border-gray-300 rounded-md shadow-sm" required />
                         </div>
                     </div>
