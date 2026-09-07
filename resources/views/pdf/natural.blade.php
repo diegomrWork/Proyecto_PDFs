@@ -248,6 +248,8 @@
     <p>Sin otro particular, quedamos de Uds.</p>
     <p>Atentamente,</p>
 
+    <br>
+
     <div class="caja-firma">
         <p class="uppercase" style="margin: 0; text-align: center;">{{ $datos['natural']['nombre'] }}</p>
         <p style="margin: 0; text-align: center;">{{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}</p>
