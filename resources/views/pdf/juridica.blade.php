@@ -31,7 +31,7 @@
         // 1. FECHA EN ESPAÑOL
         // ==========================================
         $fecha = \Carbon\Carbon::parse($datos['fecha'])->locale('es')->isoFormat('D [de] MMMM [de] YYYY');
-        $fecha = ucwords($fecha);
+
         
         // ==========================================
         // 2. DATOS DE LA EMPRESA -> DEPENDEN DEL STOCK
