@@ -54,6 +54,9 @@
         // ==========================================
         $ciudadEvaluada = mb_strtoupper($datos['ciudad']);
 
+        //Si es Talara, Tumbes o Huamachuco, forzamos Trujillo. Si no, respetamos la ciudad original.
+        $ciudadDestino = in_array($ciudadEvaluada, ['TALARA', 'TUMBES', 'HUAMACHUCO', 'TRUJILLO']) ? 'Trujillo' : ucwords(strtolower($datos['ciudad']));
+
         if ($ciudadEvaluada === 'TRUJILLO') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510 y/o <span class='bold'>LISBETH DURAND VARGAS</span>, con DNI N° 40058255";
             $oficinaRegistral = "TRUJILLO";
@@ -275,7 +278,7 @@
     <!-- ======================================================= -->
     <!-- HOJA 2: CARTA PODER (ZONA REGISTRAL)                    -->
     <!-- ======================================================= -->
-    <h3 class="text-center">CARTA PODER</h3>
+    <h2 class="text-center" style="font-size: 22px; margin-bottom: 20px;">CARTA PODER</h2>
     
     <div class="text-right">
         <p>{{ $datos['ciudad'] }}, {{ $fecha }}.</p>
@@ -283,7 +286,7 @@
 
     <p>Señores<br>
     <span class="bold">OFICINA REGISTRAL DE {{ $oficinaRegistral }} ({{ $zonaRegistral }})</span><br>
-    {{ $datos['ciudad'] }}.-</p>
+    {{ $ciudadDestino }}.-</p>
 
     <p>Muy señores nuestros.</p>
     
@@ -336,7 +339,7 @@
     <!-- ======================================================= -->
     <!-- HOJA 3: CARTA PODER (AAP)                               -->
     <!-- ======================================================= -->
-    <h3 class="text-center">CARTA PODER</h3>
+    <h2 class="text-center" style="font-size: 22px; margin-bottom: 20px;">CARTA PODER</h2>
     
     <div class="text-right">
         <p>{{ $datos['ciudad'] }}, {{ $fecha }}.</p>
@@ -344,7 +347,7 @@
 
     <p>Señores<br>
     <span class="bold">ASOCIACIÓN AUTOMOTRIZ DEL PERÚ</span><br>
-    {{ $datos['ciudad'] }}.-</p>
+    {{ $ciudadDestino }}.-</p>
 
     <p>Muy señores nuestros.</p>
     
