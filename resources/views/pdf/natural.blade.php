@@ -256,7 +256,7 @@
         <p class="uppercase" style="margin: 0; text-align: center;">{{ $datos['natural']['nombre'] }}</p>
         <p style="margin: 0; text-align: center;">{{ $datos['natural']['tipo_doc'] }} N° {{ $datos['natural']['dni'] }}</p>
     </div>
-
+    <br><br><br>
     <div style="margin-top: 40px; text-align: justify; font-size: 10px;">
         <p class="uppercase" style="text-align: justify;">CERTIFICO:<br>
         QUE LAS FIRMAS QUE ANTECEDEN CORRESPONDEN A {{ $datos['natural']['nombre'] }} CON {{ $datos['natural']['tipo_doc'] }} {{ $datos['natural']['dni'] }}. SE LEGALIZAN LAS FIRMAS MAS NO EL CONTENIDO. ESTE DOCUMENTO NO HA SIDO REDACTADO EN LA NOTARIA ART.108 D.L 1049: EL NOTARIO NO ASUME RESPONSABILIDAD SOBRE EL CONTENIDO DEL DOCUMENTO.</p>
