@@ -39,9 +39,14 @@
                     <!-- 2. FECHA DEL DOCUMENTO -->
                     <div class="mb-4">
                         <label class="block text-gray-700 font-bold mb-2">Fecha del Documento:</label>
-                        <input type="date" v-model="form.fecha" class="w-full border-gray-300 rounded-md shadow-sm" required />
+                        <input type="date" 
+                            v-model="form.fecha" 
+                            class="w-full border-gray-300 rounded-md shadow-sm bg-gray-200 text-gray-600 cursor-not-allowed pointer-events-none" 
+                            readonly 
+                            required 
+                        />
                     </div>
-
+                    
                     <!-- 3. TIPO DE CLIENTE -->
                     <div class="mb-6">
                         <label class="block text-gray-700 font-bold mb-2">Tipo de Cliente:</label>
@@ -199,7 +204,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="block text-gray-700">Domicilio(Colocar ubigeo DEPARTAMENTO - PROVNCIA - DISTRITO):</label>
+                            <label class="block text-gray-700">Domicilio (Colocar ubigeo DEPARTAMENTO - PROVINCIA - DISTRITO):</label>
                             <input type="text" v-model="form.natural.domicilio" class="w-full border-gray-300 rounded-md shadow-sm" required />
                         </div>
                     </div>
