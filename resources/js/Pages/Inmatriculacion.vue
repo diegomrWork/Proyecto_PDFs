@@ -199,7 +199,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="block text-gray-700">Domicilio:</label>
+                            <label class="block text-gray-700">Domicilio(Colocar ubigeo DEPARTAMENTO - PROVNCIA - DISTRITO):</label>
                             <input type="text" v-model="form.natural.domicilio" class="w-full border-gray-300 rounded-md shadow-sm" required />
                         </div>
                     </div>
