@@ -35,13 +35,9 @@ class InmatriculacionController extends Controller
     }
 
     public function consultarDni($dni) {
-        // Pegamos el token directamente en duro para la prueba
-        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFzYWl0b0BhdXRvbm9ydC5jb20ucGUifQ.I_bcDWkoIyKc35lF4EQ1ElHQ6SfeVQkgMTc1CxwoJr8';
-        
-        $respuesta = Http::withToken($token)
+        $respuesta = Http::withToken(env('API_PERU_TOKEN'))
             ->withoutVerifying()
             ->get("https://apiperu.dev/api/dni/{$dni}");
-            
         return response()->json($respuesta->json());
     }
 
