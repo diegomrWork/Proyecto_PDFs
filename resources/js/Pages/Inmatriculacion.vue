@@ -595,10 +595,9 @@ const buscarDocumento = async (entidad, campoDoc, campoTipo, campoNombre) => {
     else if (tipo === 'RUC' && doc && doc.length === 11) {
         try {
             const respuesta = await axios.get(`/consultar-ruc/${doc}`);
-            if (respuesta.data && respuesta.data.success) {
-                const datos = respuesta.data;
-                // APIs PERU suele devolver la empresa en el campo 'razonSocial' o 'nombre'
-                entidad[campoNombre] = datos.razonSocial || datos.nombre_o_razon_social || datos.nombre;
+            // Verificamos directamente si nos devolvió la razonSocial (ya que aquí no mandan "success")
+            if (respuesta.data && respuesta.data.razonSocial) {
+                entidad[campoNombre] = respuesta.data.razonSocial;
             }
         } catch (error) { 
             console.error("Error al buscar RUC:", error); 
