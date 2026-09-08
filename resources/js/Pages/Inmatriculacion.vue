@@ -2,7 +2,7 @@
     <div class="py-12 bg-gray-100 min-h-screen">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Generador de Cartas de Inmatriculación</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">GENERADOR DE CARTAS DE INMATRICULACIÓN</h2>
 
                 <form @submit.prevent="generarPdf">
                     
