@@ -580,11 +580,13 @@ const buscarDocumento = async (entidad, campoDoc, campoTipo, campoNombre) => {
 
     if (tipo === 'DNI' && doc && doc.length === 8) {
         try {
-            // Llama a tu propia ruta de Laravel, esquivando el bloqueo de seguridad
             const respuesta = await axios.get(`/consultar-dni/${doc}`);
+            // 1. Verificamos que success sea true
             if (respuesta.data && respuesta.data.success) {
-                const datos = respuesta.data.data;
-                entidad[campoNombre] = `${datos.nombres} ${datos.apellido_paterno} ${datos.apellido_materno}`;
+                // 2. Quitamos el .data extra porque ahora vienen directos
+                const datos = respuesta.data; 
+                // 3. Usamos los nuevos nombres (apellidoPaterno y apellidoMaterno)
+                entidad[campoNombre] = `${datos.nombres} ${datos.apellidoPaterno} ${datos.apellidoMaterno}`;
             }
         } catch (error) { 
             console.error("Error al buscar DNI:", error); 
@@ -594,7 +596,9 @@ const buscarDocumento = async (entidad, campoDoc, campoTipo, campoNombre) => {
         try {
             const respuesta = await axios.get(`/consultar-ruc/${doc}`);
             if (respuesta.data && respuesta.data.success) {
-                entidad[campoNombre] = respuesta.data.data.nombre_o_razon_social;
+                const datos = respuesta.data;
+                // APIs PERU suele devolver la empresa en el campo 'razonSocial' o 'nombre'
+                entidad[campoNombre] = datos.razonSocial || datos.nombre_o_razon_social || datos.nombre;
             }
         } catch (error) { 
             console.error("Error al buscar RUC:", error); 
