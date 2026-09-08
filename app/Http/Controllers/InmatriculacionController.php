@@ -37,14 +37,14 @@ class InmatriculacionController extends Controller
     public function consultarDni($dni) {
         $respuesta = Http::withToken(env('API_PERU_TOKEN'))
             ->withoutVerifying()
-            ->get("https://apiperu.dev/api/dni/{$dni}");
+            ->get("https://dniruc.apisperu.com/api/v1/dni/{$dni}");
         return response()->json($respuesta->json());
     }
 
     public function consultarRuc($ruc) {
         $respuesta = Http::withToken(env('API_PERU_TOKEN'))
             ->withoutVerifying()
-            ->get("https://apiperu.dev/api/ruc/{$ruc}");
+            ->get("https://dniruc.apisperu.com/api/v1/ruc/{$ruc}");
         return response()->json($respuesta->json());
     }
 }
