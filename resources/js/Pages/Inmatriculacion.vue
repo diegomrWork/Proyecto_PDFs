@@ -176,6 +176,8 @@
                             <select v-model="form.natural.estado_civil" class="w-full border-gray-300 rounded-md shadow-sm" required>
                                 <option value="SOLTERO">Soltero/a</option>
                                 <option value="CASADO">Casado/a</option>
+                                <option value="VIUDO">Viudo/a</option>
+                                <option value="DIVORCIADO">Divorciado/a</option>
                             </select>
                         </div>
 
@@ -249,6 +251,8 @@
                                 <select v-model="propietario.estado_civil" class="w-full border-gray-300 rounded-md shadow-sm" required>
                                     <option value="SOLTERO">Soltero/a</option>
                                     <option value="CASADO">Casado/a</option>
+                                    <option value="VIUDO">Viudo/a</option>
+                                    <option value="DIVORCIADO">Divorciado/a</option>
                                 </select>
                             </div>
                             
