@@ -301,6 +301,7 @@
     <p>Sin otro particular, quedamos de Uds.</p>
     <p>Atentamente,</p>
     <br><br>
+    <br><br>
     <table class="tabla-firmas">
         @foreach($gruposFirmas as $grupo)
             <tr>
