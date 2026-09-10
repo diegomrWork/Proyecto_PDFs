@@ -174,7 +174,7 @@
         <p>{!! $textoVendedorITF !!}</p>
     </div>
 
-    <p>El Comprador, <span class="uppercase bold">{{ $datos['juridica']['nombre_empresa'] }}</span> con RUC N° {{ $datos['juridica']['ruc'] }}, debidamente representado por <span class="uppercase">{{ $datos['juridica']['nombre_representante'] }}</span>, identificado(a) con {{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }} según partida N° {{ $datos['juridica']['partida'] }} del Registro de Personas Jurídicas de <span class="uppercase">{{ $datos['juridica']['provincia_registral'] }}</span>.</p>
+    <p>El Comprador, <span class="uppercase bold">{{ $datos['juridica']['nombre_empresa'] }}</span> con RUC N° {{ $datos['juridica']['ruc'] }}, debidamente representado por <span class="uppercase">{{ $datos['juridica']['nombre_representante'] }}</span>, identificado(a) con {{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}@if(!empty($datos['juridica']['partida'])) según partida N° {{ $datos['juridica']['partida'] }} del Registro de Personas Jurídicas de <span class="uppercase">{{ $datos['juridica']['provincia_registral'] }}</span>@endif.</p>
 
     <p>Declaran que la venta de una Vehículo; marca <span class="uppercase">{{ $datos['vehiculo']['marca'] }}</span>, Modelo <span class="uppercase">{{ $datos['vehiculo']['modelo'] }}</span>; se realizó de acuerdo como se detalla a continuación:</p>
 
@@ -242,7 +242,7 @@
     <br>
     
     <div style="text-align: justify">
-        <p>Yo, <span class="uppercase">{{ $datos['juridica']['nombre_representante'] }}</span> identificado(a) con {{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}, en calidad de Apoderado de <span class="uppercase">{{ $datos['juridica']['nombre_empresa'] }}</span>, con RUC N° {{ $datos['juridica']['ruc'] }}, con partida N° {{ $datos['juridica']['partida'] }} Del Registro de Personas Jurídicas de <span class="uppercase">{{ $datos['juridica']['provincia_registral'] }}</span>. Otorgo amplio poder a {!! $apoderadosRegistral !!}, para que en mi representación suscriba el Formato de Inmatriculación, Formato Notarial de Cambio de Características, Declaración de Tipo de Uso y cualquier documento que sea necesario para la Inmatriculación del Vehículo con N° de Serie: {{ empty($datos['vehiculo']['serie_chasis']) ? '____________________________________' : $datos['vehiculo']['serie_chasis'] }} y Nº de Motor: {{ empty($datos['vehiculo']['motor']) ? '____________________________________' : $datos['vehiculo']['motor'] }}.</p>
+        <p>Yo, <span class="uppercase">{{ $datos['juridica']['nombre_representante'] }}</span> identificado(a) con {{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}, en calidad de Apoderado de <span class="uppercase">{{ $datos['juridica']['nombre_empresa'] }}</span>, con RUC N° {{ $datos['juridica']['ruc'] }}@if(!empty($datos['juridica']['partida'])), con partida N° {{ $datos['juridica']['partida'] }} Del Registro de Personas Jurídicas de <span class="uppercase">{{ $datos['juridica']['provincia_registral'] }}</span>@endif. Otorgo amplio poder a {!! $apoderadosRegistral !!}, para que en mi representación suscriba el Formato de Inmatriculación, Formato Notarial de Cambio de Características, Declaración de Tipo de Uso y cualquier documento que sea necesario para la Inmatriculación del Vehículo con N° de Serie: {{ empty($datos['vehiculo']['serie_chasis']) ? '____________________________________' : $datos['vehiculo']['serie_chasis'] }} y Nº de Motor: {{ empty($datos['vehiculo']['motor']) ? '____________________________________' : $datos['vehiculo']['motor'] }}.</p>
     </div>
     
     <br>
@@ -259,7 +259,7 @@
 
     <div style="margin-top: 40px; text-align: justify; font-size: 10px;">
         <p class="uppercase">CERTIFICO:<br>
-        QUE LAS FIRMAS QUE ANTECEDEN CORRESPONDEN A {{ $datos['juridica']['nombre_representante'] }} CON DNI {{ $datos['juridica']['dni_representante'] }} EN REPRESENTACIÓN DE {{ $datos['juridica']['nombre_empresa'] }} CON PODER INSCRITO EN LA PARTIDA NRO. {{ $datos['juridica']['partida'] }} DE LA OFICINA REGISTRAL DE {{ $datos['juridica']['provincia_registral'] }}. SE LEGALIZAN LAS FIRMAS MAS NO EL CONTENIDO. ESTE DOCUMENTO NO HA SIDO REDACTADO EN LA NOTARIA ART.108 D.L 1049: EL NOTARIO NO ASUME RESPONSABILIDAD SOBRE EL CONTENIDO DEL DOCUMENTO</p>
+        QUE LAS FIRMAS QUE ANTECEDEN CORRESPONDEN A {{ $datos['juridica']['nombre_representante'] }} CON DNI {{ $datos['juridica']['dni_representante'] }} EN REPRESENTACIÓN DE {{ $datos['juridica']['nombre_empresa'] }}@if(!empty($datos['juridica']['partida'])) CON PODER INSCRITO EN LA PARTIDA NRO. {{ $datos['juridica']['partida'] }} DE LA OFICINA REGISTRAL DE {{ $datos['juridica']['provincia_registral'] }}@endif. SE LEGALIZAN LAS FIRMAS MAS NO EL CONTENIDO. ESTE DOCUMENTO NO HA SIDO REDACTADO EN LA NOTARIA ART.108 D.L 1049: EL NOTARIO NO ASUME RESPONSABILIDAD SOBRE EL CONTENIDO DEL DOCUMENTO</p>
     </div>
 
     <div class="page-break"></div>
@@ -280,7 +280,7 @@
     <p>Muy señores nuestros.</p>
     
     <div style="text-align: justify">
-        <p><span class="uppercase">{{ $datos['juridica']['nombre_representante'] }}</span>, identificado(a) con {{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}, en representación de <span class="uppercase">{{ $datos['juridica']['nombre_empresa'] }}</span>, con RUC N° {{ $datos['juridica']['ruc'] }}, con partida Registral N° {{ $datos['juridica']['partida'] }} del Registro de Personas Jurídicas de <span class="uppercase">{{ $datos['juridica']['provincia_registral'] }}</span>; otorgo amplio poder a {!! $apoderadosAAP !!}, para que en mi representación realicen los trámites para el recojo de la placa N° .........................</p>
+        <p><span class="uppercase">{{ $datos['juridica']['nombre_representante'] }}</span>, identificado(a) con {{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}, en representación de <span class="uppercase">{{ $datos['juridica']['nombre_empresa'] }}</span>, con RUC N° {{ $datos['juridica']['ruc'] }}@if(!empty($datos['juridica']['partida'])), con partida Registral N° {{ $datos['juridica']['partida'] }} del Registro de Personas Jurídicas de <span class="uppercase">{{ $datos['juridica']['provincia_registral'] }}</span>@endif; otorgo amplio poder a {!! $apoderadosAAP !!}, para que en mi representación realicen los trámites para el recojo de la placa N° .........................</p>
     </div>
     
     <p>Sin otro particular, quedamos de Uds.</p>
