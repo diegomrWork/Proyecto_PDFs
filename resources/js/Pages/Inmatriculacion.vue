@@ -108,7 +108,11 @@
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label class="block text-gray-700">N° de Partida Registral:</label>
-                                <input type="text" v-model="form.juridica.partida" class="w-full border-gray-300 rounded-md shadow-sm" />
+                                <input type="text" 
+                                    v-model="form.juridica.partida" 
+                                    class="w-full border-gray-300 rounded-md shadow-sm" 
+                                    :required="form.juridica.provincia_registral.length > 0" 
+                                />
                             </div>
                             
                             <!-- NUEVO BUSCADOR DE PROVINCIA REGISTRAL -->
@@ -120,7 +124,9 @@
                                         @focus="mostrarDropdownProvincia = true"
                                         @blur="validarProvincia"
                                         class="w-full border-gray-300 rounded-md shadow-sm pr-10 uppercase" 
-                                        placeholder="Seleccione..." autocomplete="off" />
+                                        placeholder="Seleccione..." autocomplete="off" 
+                                        :required="form.juridica.partida.length > 0" 
+                                    />
                                     
                                     <div class="absolute right-3 top-3 pointer-events-none text-gray-500">
                                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
