@@ -250,13 +250,12 @@
     <p>Atentamente,</p>
 
     <br><br>
-    <br><br>
-    <br><br>
+    <br>
     <div class="caja-firma">
         <p class="uppercase" style="margin: 0;">{{ $datos['juridica']['nombre_representante'] }}</p>
         <p style="margin: 0;">{{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}</p>
     </div>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br>
 
     <div style="margin-top: 40px; text-align: justify; font-size: 10px;">
         <p class="uppercase">CERTIFICO:<br>
