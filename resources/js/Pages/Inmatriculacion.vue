@@ -1,4 +1,22 @@
 <template>
+<!-- MODAL DE ADVERTENCIA INICIAL -->
+    <div v-if="mostrarModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full overflow-hidden flex flex-col items-center">
+            <!-- Llamamos a la imagen que guardaste en la carpeta public -->
+            <img src="/recordatorio.png" alt="Recordatorio Importante" class="w-full h-auto object-cover" />
+            
+            <div class="p-4 w-full bg-gray-50 border-t">
+                <button 
+                    @click="cerrarModal" 
+                    :disabled="contadorModal > 0"
+                    :class="contadorModal > 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'"
+                    class="w-full text-white font-bold py-3 px-4 rounded-md transition-colors"
+                >
+                    ACEPTAR {{ contadorModal > 0 ? `(${contadorModal})` : '' }}
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="py-12 bg-gray-100 min-h-screen">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -375,8 +393,32 @@
 import { useForm } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const fechaHoy = new Date().toISOString().split('T')[0];
+
+// --- LÓGICA DEL MODAL DE ADVERTENCIA ---
+const mostrarModal = ref(true); // Se muestra por defecto al entrar
+const contadorModal = ref(3);   // Inicia en 3 segundos
+
+onMounted(() => {
+    // Iniciamos una cuenta regresiva que baja 1 cada 1000ms (1 segundo)
+    const intervalo = setInterval(() => {
+        if (contadorModal.value > 0) {
+            contadorModal.value--;
+        } else {
+            clearInterval(intervalo); // Detiene el reloj al llegar a 0
+        }
+    }, 1000);
+});
+
+const cerrarModal = () => {
+    if (contadorModal.value === 0) {
+        mostrarModal.value = false;
+    }
+};
+// ---------------------------------------
+
 
 // --- LÓGICA DEL BUSCADOR DE MODELOS ---
 const mostrarDropdown = ref(false);
