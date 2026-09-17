@@ -392,7 +392,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import axios from 'axios';
-import { ref, computed } from 'vue';
 import { ref, computed, onMounted } from 'vue';
 
 const fechaHoy = new Date().toISOString().split('T')[0];
