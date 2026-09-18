@@ -398,7 +398,7 @@ const fechaHoy = new Date().toISOString().split('T')[0];
 
 // --- LÓGICA DEL MODAL DE ADVERTENCIA ---
 const mostrarModal = ref(true); // Se muestra por defecto al entrar
-const contadorModal = ref(3);   // Inicia en 3 segundos
+const contadorModal = ref(5);   // Inicia en 3 segundos
 
 onMounted(() => {
     // Iniciamos una cuenta regresiva que baja 1 cada 1000ms (1 segundo)
