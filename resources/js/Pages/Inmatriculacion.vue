@@ -423,7 +423,7 @@ const cerrarModal = () => {
 const mostrarDropdown = ref(false);
 
 const listaModelos = [
-    '_____________', 'FORTUNER', 'AGYA', 'HILUX', 'YARIS' , 'YARIS CROSS', 'COROLLA', 'COROLLA CROSS', '4RUNNER', 'RAIZE', 'RUSH', 'ETIOS', 'AVENSIS', 'AURIS', 'CAMRY', 'PRIUS', '86', 'AVANZA', 'FJ CRUISER', 'PRADO', 'RAV4', 'LC 200', '4RUNNER', 'DUTRO', 'FC', 'FT', 'FG', 'GH', 'FD', 'FC BUS', 'FM', 'C-HR', 'HIACE'
+    '_____________', 'FORTUNER', 'AGYA', 'HILUX', 'YARIS' , 'YARIS CROSS', 'COROLLA', 'COROLLA CROSS', '4RUNNER', 'RAIZE', 'RUSH', 'ETIOS', 'AVENSIS', 'AURIS', 'CAMRY', 'PRIUS', '86', 'AVANZA', 'FJ CRUISER', 'LAND CRUISER PRADO', 'RAV4', 'LC 200', '4RUNNER', 'DUTRO', 'FC', 'FT', 'FG', 'GH', 'FD', 'FC BUS', 'FM', 'C-HR', 'HIACE'
 ];
 
 const modelosFiltrados = computed(() => {
