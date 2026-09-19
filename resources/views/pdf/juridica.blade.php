@@ -250,7 +250,6 @@
     <p>Atentamente,</p>
 
     <br><br>
-    <br>
     <div class="caja-firma">
         <p class="uppercase" style="margin: 0;">{{ $datos['juridica']['nombre_representante'] }}</p>
         <p style="margin: 0;">{{ $datos['juridica']['tipo_doc_representante'] }} N° {{ $datos['juridica']['dni_representante'] }}</p>
