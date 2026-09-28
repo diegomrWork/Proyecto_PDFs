@@ -235,26 +235,51 @@
                             </div>
                         </div>
 
-                        <div v-if="form.natural.estado_civil === 'CASADO'" class="grid grid-cols-2 gap-4 mb-4 bg-gray-50 p-4 rounded-md">
-                            <div>
-                                <label class="block text-gray-700">Documento del Cónyuge:</label>
-                                <div class="flex gap-2">
-                                    <select v-model="form.natural.tipo_doc_conyuge" @change="limpiarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge')" class="w-1/3 border-gray-300 rounded-md shadow-sm" required>
-                                        <option value="DNI">DNI</option>
-                                        <option value="C.E.">C.E.</option>
-                                        <option value="PASAPORTE">Pasaporte</option>
-                                        <option value="RUC">RUC</option>
-                                    </select>
-                                    <input type="text" v-model="form.natural.dni_conyuge" 
-                                        @input="limpiarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge'); buscarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge', 'nombre_conyuge')"
-                                        :minlength="form.natural.tipo_doc_conyuge === 'DNI' ? 8 : (form.natural.tipo_doc_conyuge === 'RUC' ? 11 : null)" 
-                                        :maxlength="form.natural.tipo_doc_conyuge === 'DNI' ? 8 : (form.natural.tipo_doc_conyuge === 'RUC' ? 11 : null)" 
-                                        class="w-2/3 border-gray-300 rounded-md shadow-sm" required />
+                        <!-- BLOQUE CASADOS: SEPARACIÓN DE BIENES O CÓNYUGE -->
+                        <div v-if="form.natural.estado_civil === 'CASADO'" class="mb-4 bg-gray-50 p-4 rounded-md border border-gray-200">
+                            <label class="block text-gray-700 font-bold mb-2">¿Tienen Separación de Bienes?</label>
+                            <select v-model="form.natural.bienes_separados" class="w-full border-gray-300 rounded-md shadow-sm mb-4">
+                                <option value="NO">NO</option>
+                                <option value="SI">SI</option>
+                            </select>
+
+                            <!-- SI MARCA "NO": Pide datos del cónyuge normalmente -->
+                            <div v-if="form.natural.bienes_separados === 'NO'" class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700">Documento del Cónyuge:</label>
+                                    <div class="flex gap-2">
+                                        <select v-model="form.natural.tipo_doc_conyuge" @change="limpiarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge')" class="w-1/3 border-gray-300 rounded-md shadow-sm" :required="form.natural.bienes_separados === 'NO'">
+                                            <option value="DNI">DNI</option>
+                                            <option value="C.E.">C.E.</option>
+                                            <option value="PASAPORTE">Pasaporte</option>
+                                            <option value="RUC">RUC</option>
+                                        </select>
+                                        <input type="text" v-model="form.natural.dni_conyuge" 
+                                            @input="limpiarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge'); buscarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge', 'nombre_conyuge')"
+                                            :minlength="form.natural.tipo_doc_conyuge === 'DNI' ? 8 : (form.natural.tipo_doc_conyuge === 'RUC' ? 11 : null)" 
+                                            :maxlength="form.natural.tipo_doc_conyuge === 'DNI' ? 8 : (form.natural.tipo_doc_conyuge === 'RUC' ? 11 : null)" 
+                                            class="w-2/3 border-gray-300 rounded-md shadow-sm" :required="form.natural.bienes_separados === 'NO'" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700">Nombre Completo del Cónyuge:</label>
+                                    <input type="text" v-model="form.natural.nombre_conyuge" class="w-full border-gray-300 rounded-md shadow-sm" :required="form.natural.bienes_separados === 'NO'" />
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-gray-700">Nombre Completo del Cónyuge:</label>
-                                <input type="text" v-model="form.natural.nombre_conyuge" class="w-full border-gray-300 rounded-md shadow-sm" required />
+
+                            <!-- SI MARCA "SI": Pide Partida y Sede -->
+                            <div v-if="form.natural.bienes_separados === 'SI'" class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700">N° de Partida Registral:</label>
+                                    <input type="text" v-model="form.natural.partida_bienes" class="w-full border-gray-300 rounded-md shadow-sm" :required="form.natural.bienes_separados === 'SI'" />
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700">Sede (Oficina Registral):</label>
+                                    <select v-model="form.natural.sede_bienes" class="w-full border-gray-300 rounded-md shadow-sm uppercase" :required="form.natural.bienes_separados === 'SI'">
+                                        <option value="" disabled>Seleccione...</option>
+                                        <option v-for="prov in listaProvincias" :key="prov" :value="prov">{{ prov }}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -547,7 +572,10 @@ const form = useForm({
         dni_union: '',
         nombre_union: '',
         partida_union: '',
-        sede_union: ''
+        sede_union: '',
+        bienes_separados: 'NO',
+        partida_bienes: '',
+        sede_bienes: ''
     },
     copropiedad: {
         domicilio: '',
