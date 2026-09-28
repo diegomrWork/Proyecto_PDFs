@@ -247,7 +247,7 @@
     </div>
 
     <div style="text-align: justify">
-        <p>Asimismo, declaro que mi estado civil es {{ strtoupper($datos['natural']['estado_civil']) }}(A)@if($datos['natural']['estado_civil'] === 'CASADO'), con la persona <span class="uppercase bold">{{ $datos['natural']['nombre_conyuge'] }}</span> identificado(a) con {{ $datos['natural']['tipo_doc_conyuge'] }} N° {{ $datos['natural']['dni_conyuge'] }}@endif, y con domicilio en {{ strtoupper($datos['natural']['domicilio']) }}.</p>
+        <p>Asimismo, declaro que mi estado civil es {{ strtoupper($datos['natural']['estado_civil']) }}(A)@if($datos['natural']['estado_civil'] === 'CASADO'), con la persona <span class="uppercase bold">{{ $datos['natural']['nombre_conyuge'] }}</span> identificado(a) con {{ $datos['natural']['tipo_doc_conyuge'] }} N° {{ $datos['natural']['dni_conyuge'] }}@elseif($datos['natural']['estado_civil'] === 'SOLTERO' && isset($datos['natural']['union_hecho']) && $datos['natural']['union_hecho'] === 'SI'), con unión de hecho con {{ ucwords(strtolower($datos['natural']['nombre_union'])) }} inscrito en la partida {{ $datos['natural']['partida_union'] }} de la sede de {{ ucwords(strtolower($datos['natural']['sede_union'])) }}@endif, y con domicilio en {{ strtoupper($datos['natural']['domicilio']) }}.</p>
     </div>
 
     <p>Sin otro particular, quedamos de Uds.</p>
