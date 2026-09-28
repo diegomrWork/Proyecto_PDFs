@@ -87,7 +87,6 @@
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label class="block text-gray-700">RUC de la Empresa (11 dígitos):</label>
-                                <!-- Como aquí siempre es RUC, forzamos la búsqueda de 11 dígitos -->
                                 <input type="text" v-model="form.juridica.ruc" 
                                     @input="form.juridica.ruc = form.juridica.ruc.replace(/\D/g, '').slice(0, 11); form.juridica.tipo_doc_empresa = 'RUC'; buscarDocumento(form.juridica, 'ruc', 'tipo_doc_empresa', 'nombre_empresa')"
                                     minlength="11" maxlength="11"
@@ -109,7 +108,6 @@
                                         <option value="PASAPORTE">Pasaporte</option>
                                         <option value="RUC">RUC</option>
                                     </select>
-                                    <!-- VALIDACIÓN DNI -->
                                     <input type="text" v-model="form.juridica.dni_representante" 
                                         @input="limpiarDocumento(form.juridica, 'dni_representante', 'tipo_doc_representante'); buscarDocumento(form.juridica, 'dni_representante', 'tipo_doc_representante', 'nombre_representante')" 
                                             :minlength="form.juridica.tipo_doc_representante === 'DNI' ? 8 : (form.juridica.tipo_doc_representante === 'RUC' ? 11 : null)" 
@@ -133,7 +131,6 @@
                                 />
                             </div>
                             
-                            <!-- NUEVO BUSCADOR DE PROVINCIA REGISTRAL -->
                             <div>
                                 <label class="block text-gray-700">Provincia (Oficina Registral):</label>
                                 <div class="relative">
@@ -181,7 +178,6 @@
                                         <option value="PASAPORTE">Pasaporte</option>
                                         <option value="RUC">RUC</option>
                                     </select>
-                                    <!-- VALIDACIÓN DNI -->
                                     <input type="text" v-model="form.natural.dni"
                                         @input="limpiarDocumento(form.natural, 'dni', 'tipo_doc'); buscarDocumento(form.natural, 'dni', 'tipo_doc', 'nombre')"
                                             :minlength="form.natural.tipo_doc === 'DNI' ? 8 : (form.natural.tipo_doc === 'RUC' ? 11 : null)"
@@ -205,6 +201,40 @@
                             </select>
                         </div>
 
+                        <!-- NUEVO BLOQUE: UNIÓN DE HECHO (SOLO PARA SOLTEROS) -->
+                        <div v-if="form.natural.estado_civil === 'SOLTERO'" class="mb-4 bg-gray-50 p-4 rounded-md border border-gray-200">
+                            <label class="block text-gray-700 font-bold mb-2">¿Tiene Unión de Hecho registrada?</label>
+                            <select v-model="form.natural.union_hecho" class="w-full border-gray-300 rounded-md shadow-sm mb-4">
+                                <option value="NO">NO</option>
+                                <option value="SI">SI</option>
+                            </select>
+
+                            <div v-if="form.natural.union_hecho === 'SI'" class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700">DNI de la Pareja:</label>
+                                    <input type="text" v-model="form.natural.dni_union" 
+                                        @input="form.natural.dni_union = form.natural.dni_union.replace(/\D/g, '').slice(0, 8); form.natural.tipo_doc_union = 'DNI'; buscarDocumento(form.natural, 'dni_union', 'tipo_doc_union', 'nombre_union')"
+                                        minlength="8" maxlength="8"
+                                        class="w-full border-gray-300 rounded-md shadow-sm" required />
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700">Nombre de la Pareja:</label>
+                                    <input type="text" v-model="form.natural.nombre_union" class="w-full border-gray-300 rounded-md shadow-sm" required />
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700">N° de Partida Registral:</label>
+                                    <input type="text" v-model="form.natural.partida_union" class="w-full border-gray-300 rounded-md shadow-sm" required />
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700">Sede (Oficina Registral):</label>
+                                    <select v-model="form.natural.sede_union" class="w-full border-gray-300 rounded-md shadow-sm uppercase" required>
+                                        <option value="" disabled>Seleccione...</option>
+                                        <option v-for="prov in listaProvincias" :key="prov" :value="prov">{{ prov }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div v-if="form.natural.estado_civil === 'CASADO'" class="grid grid-cols-2 gap-4 mb-4 bg-gray-50 p-4 rounded-md">
                             <div>
                                 <label class="block text-gray-700">Documento del Cónyuge:</label>
@@ -215,7 +245,6 @@
                                         <option value="PASAPORTE">Pasaporte</option>
                                         <option value="RUC">RUC</option>
                                     </select>
-                                    <!-- VALIDACIÓN DNI -->
                                     <input type="text" v-model="form.natural.dni_conyuge" 
                                         @input="limpiarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge'); buscarDocumento(form.natural, 'dni_conyuge', 'tipo_doc_conyuge', 'nombre_conyuge')"
                                         :minlength="form.natural.tipo_doc_conyuge === 'DNI' ? 8 : (form.natural.tipo_doc_conyuge === 'RUC' ? 11 : null)" 
@@ -258,7 +287,6 @@
                                             <option value="PASAPORTE">Pasaporte</option>
                                             <option value="RUC">RUC</option>
                                         </select>
-                                        <!-- VALIDACIÓN DNI -->
                                         <input type="text" v-model="propietario.dni" 
                                             @input="limpiarDocumento(propietario, 'dni', 'tipo_doc'); buscarDocumento(propietario, 'dni', 'tipo_doc', 'nombre')"
                                                 :minlength="propietario.tipo_doc === 'DNI' ? 8 : (propietario.tipo_doc === 'RUC' ? 11 : null)" 
@@ -289,7 +317,6 @@
                                             <option value="PASAPORTE">Pasaporte</option>
                                             <option value="RUC">RUC</option>
                                         </select>
-                                        <!-- VALIDACIÓN DNI -->
                                         <input type="text" v-model="propietario.dni_conyuge" 
                                             @input="limpiarDocumento(propietario, 'dni_conyuge', 'tipo_doc_conyuge'); buscarDocumento(propietario, 'dni_conyuge', 'tipo_doc_conyuge', 'nombre_conyuge')"
                                                 :minlength="propietario.tipo_doc_conyuge === 'DNI' ? 8 : (propietario.tipo_doc_conyuge === 'RUC' ? 11 : null)" 
@@ -329,11 +356,9 @@
                             </select>
                         </div>
                         
-                        <!-- DESPLEGABLE BUSCADOR PARA MODELO -->
                         <div class="relative">
                             <label class="block text-gray-700">Modelo:</label>
                             
-                            <!-- Input que parece un select -->
                             <input type="text" 
                                 v-model="form.vehiculo.modelo" 
                                 @focus="mostrarDropdown = true"
@@ -341,12 +366,10 @@
                                 class="w-full border-gray-300 rounded-md shadow-sm pr-10 uppercase" 
                                 placeholder="Buscar o seleccionar..." required autocomplete="off" />
                             
-                            <!-- Ícono de flecha (diseño simulado de select) -->
                             <div class="absolute right-3 top-9 pointer-events-none text-gray-500">
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
 
-                            <!-- Lista flotante con los resultados -->
                             <ul v-if="mostrarDropdown" class="absolute z-10 w-full bg-white border border-gray-300 mt-1 max-h-48 overflow-y-auto rounded-md shadow-lg uppercase">
                                 <li v-for="modelo in modelosFiltrados" :key="modelo"
                                     @mousedown.prevent="seleccionarModelo(modelo)"
@@ -417,7 +440,6 @@ const cerrarModal = () => {
     }
 };
 // ---------------------------------------
-
 
 // --- LÓGICA DEL BUSCADOR DE MODELOS ---
 const mostrarDropdown = ref(false);
@@ -519,7 +541,13 @@ const form = useForm({
         tipo_doc_conyuge: '',
         dni_conyuge: '',
         nombre_conyuge: '',
-        domicilio: ''
+        domicilio: '',
+        union_hecho: 'NO',
+        tipo_doc_union: 'DNI',
+        dni_union: '',
+        nombre_union: '',
+        partida_union: '',
+        sede_union: ''
     },
     copropiedad: {
         domicilio: '',
