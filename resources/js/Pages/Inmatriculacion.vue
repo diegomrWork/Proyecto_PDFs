@@ -2,6 +2,7 @@
 <!-- MODAL DE ADVERTENCIA INICIAL -->
     <div v-if="mostrarModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
         <div class="bg-white rounded-lg shadow-xl max-w-lg w-full overflow-hidden flex flex-col items-center">
+            <!-- Llamamos a la imagen que guardaste en la carpeta public -->
             <img src="/recordatorio.png" alt="Recordatorio Importante" class="w-full h-auto object-cover" />
             
             <div class="p-4 w-full bg-gray-50 border-t">
@@ -200,7 +201,7 @@
                             </select>
                         </div>
 
-                        <!-- BLOQUE: UNIÓN DE HECHO (SOLO PARA SOLTEROS) -->
+                        <!-- NUEVO BLOQUE: UNIÓN DE HECHO (SOLO PARA SOLTEROS) -->
                         <div v-if="form.natural.estado_civil === 'SOLTERO'" class="mb-4 bg-gray-50 p-4 rounded-md border border-gray-200">
                             <label class="block text-gray-700 font-bold mb-2">¿Tiene Unión de Hecho registrada?</label>
                             <select v-model="form.natural.union_hecho" class="w-full border-gray-300 rounded-md shadow-sm mb-4">
@@ -282,36 +283,9 @@
                             </div>
                         </div>
 
-                        <!-- NUEVO: SELECTORES DINÁMICOS DE UBIGEO -->
-                        <div class="mb-4 bg-gray-50 p-4 rounded-md border border-gray-200">
-                            <label class="block text-gray-700 font-bold mb-4">Seleccione Ubigeo del Domicilio:</label>
-                            
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-gray-700 text-sm">Departamento:</label>
-                                    <select v-model="depNatural" @change="cambioDepartamento" class="w-full border-gray-300 rounded-md shadow-sm text-sm">
-                                        <option value="">Seleccione...</option>
-                                        <option v-for="dep in departamentos" :key="dep" :value="dep">{{ dep }}</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 text-sm">Provincia:</label>
-                                    <select v-model="provNatural" @change="cambioProvincia" :disabled="!depNatural" class="w-full border-gray-300 rounded-md shadow-sm text-sm">
-                                        <option value="">Seleccione...</option>
-                                        <option v-for="prov in provincias" :key="prov" :value="prov">{{ prov }}</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 text-sm">Distrito:</label>
-                                    <select v-model="distNatural" @change="cambioDistrito" :disabled="!provNatural" class="w-full border-gray-300 rounded-md shadow-sm text-sm">
-                                        <option value="">Seleccione...</option>
-                                        <option v-for="dist in distritos" :key="dist" :value="dist">{{ dist }}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <label class="block text-gray-700 font-bold">Domicilio: DIRECCIÓN + UBIGEO(DEPARTAMENTO - PROVINCIA - DISTRITO)</label>
-                            <input type="text" v-model="form.natural.domicilio" placeholder="Ej: Av. Larco 123 - LA LIBERTAD - TRUJILLO - TRUJILLO" class="w-full border-gray-300 rounded-md shadow-sm" required />
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Domicilio: DIRECCIÓN + UBIGEO(DEPARTAMENTO - PROVINCIA - DISTRITO)</label>
+                            <input type="text" v-model="form.natural.domicilio" class="w-full border-gray-300 rounded-md shadow-sm" required />
                         </div>
                     </div>
 
@@ -471,104 +445,18 @@ import { ref, computed, onMounted } from 'vue';
 const fechaHoy = new Date().toISOString().split('T')[0];
 
 // --- LÓGICA DEL MODAL DE ADVERTENCIA ---
-const mostrarModal = ref(true);
-const contadorModal = ref(5);
+const mostrarModal = ref(true); // Se muestra por defecto al entrar
+const contadorModal = ref(5);   // Inicia en 3 segundos
 
-// --- LÓGICA DE UBIGEOS (API + FALLBACK) ---
-const depNatural = ref('');
-const provNatural = ref('');
-const distNatural = ref('');
-const ubigeosData = ref({});
-
-const departamentos = computed(() => Object.keys(ubigeosData.value).sort());
-
-const provincias = computed(() => {
-    if (depNatural.value && ubigeosData.value[depNatural.value]) {
-        return Object.keys(ubigeosData.value[depNatural.value]).sort();
-    }
-    return [];
-});
-
-const distritos = computed(() => {
-    if (provNatural.value && depNatural.value && ubigeosData.value[depNatural.value][provNatural.value]) {
-        return ubigeosData.value[depNatural.value][provNatural.value].sort();
-    }
-    return [];
-});
-
-const cambioDepartamento = () => {
-    provNatural.value = '';
-    distNatural.value = '';
-};
-
-const cambioProvincia = () => {
-    distNatural.value = '';
-};
-
-const cambioDistrito = () => {
-    if (distNatural.value) {
-        // Extraemos lo que el usuario haya escrito antes del guion
-        let texto = form.natural.domicilio || '';
-        let direccion = texto.split(' - ')[0].trim(); 
-        
-        // Si no había escrito nada, o es solo un departamento viejo, preparamos el formato
-        if (departamentos.value.includes(direccion) || direccion === '') {
-            form.natural.domicilio = ` - ${depNatural.value} - ${provNatural.value} - ${distNatural.value}`;
-        } else {
-            // Si ya escribió "Av. Larco 123", le sumamos el nuevo ubigeo
-            form.natural.domicilio = `${direccion} - ${depNatural.value} - ${provNatural.value} - ${distNatural.value}`;
-        }
-    }
-};
-
-onMounted(async () => {
+onMounted(() => {
+    // Iniciamos una cuenta regresiva que baja 1 cada 1000ms (1 segundo)
     const intervalo = setInterval(() => {
         if (contadorModal.value > 0) {
             contadorModal.value--;
         } else {
-            clearInterval(intervalo);
+            clearInterval(intervalo); // Detiene el reloj al llegar a 0
         }
     }, 1000);
-
-    // Cargar Ubigeos desde la API de forma dinámica
-    try {
-        const respuesta = await axios.get('https://free.e-api.net.pe/ubigeos.json');
-        let data = respuesta.data;
-        if (Array.isArray(data)) {
-            const nested = {};
-            data.forEach(item => {
-                const dep = item.departamento || item.Departamento || item.desc_dep_sunat;
-                const prov = item.provincia || item.Provincia || item.desc_prov_sunat;
-                const dist = item.distrito || item.Distrito || item.desc_ubigeo_sunat;
-                if (!dep || !prov || !dist) return;
-                
-                const d = dep.toUpperCase();
-                const p = prov.toUpperCase();
-                const di = dist.toUpperCase();
-
-                if (!nested[d]) nested[d] = {};
-                if (!nested[d][p]) nested[d][p] = [];
-                if (!nested[d][p].includes(di)) nested[d][p].push(di);
-            });
-            ubigeosData.value = nested;
-        } else if (typeof data === 'object') {
-            ubigeosData.value = data;
-        }
-    } catch (error) {
-        console.error('Error conectando a la API de Ubigeos:', error);
-    }
-    
-    // FALLBACK DE EMERGENCIA: Si la API gratuita no responde, cargamos los datos vitales
-    if (Object.keys(ubigeosData.value).length === 0) {
-        ubigeosData.value = {
-            "LA LIBERTAD": { "TRUJILLO": ["TRUJILLO", "EL PORVENIR", "HUANCHACO", "VICTOR LARCO HERRERA", "LA ESPERANZA", "LAREDO", "MOCHE", "SALAVERRY", "FLORENCIA DE MORA", "SIMBAL", "POROTO"] },
-            "CAJAMARCA": { "CAJAMARCA": ["CAJAMARCA", "BAÑOS DEL INCA", "LLACANORA", "JESÚS", "ASUNCIÓN"] },
-            "LIMA": { "LIMA": ["LIMA", "MIRAFLORES", "SAN ISIDRO", "SANTIAGO DE SURCO", "SAN BORJA"] },
-            "PIURA": { "PIURA": ["PIURA", "CASTILLA", "CATACAOS"] },
-            "ANCASH": { "SANTA": ["CHIMBOTE", "NUEVO CHIMBOTE"] },
-            "TUMBES": { "TUMBES": ["TUMBES", "CORRALES", "LA CRUZ"] }
-        };
-    }
 });
 
 const cerrarModal = () => {
@@ -576,6 +464,7 @@ const cerrarModal = () => {
         mostrarModal.value = false;
     }
 };
+// ---------------------------------------
 
 // --- LÓGICA DEL BUSCADOR DE MODELOS ---
 const mostrarDropdown = ref(false);
@@ -609,6 +498,7 @@ const validarModelo = () => {
         }
     }, 150);
 };
+// --------------------------------------
 
 // --- LÓGICA DEL BUSCADOR DE PROVINCIAS REGISTRALES ---
 const mostrarDropdownProvincia = ref(false);
@@ -652,6 +542,7 @@ const validarProvincia = () => {
         }
     }, 150);
 };
+// ---------------------------------------------------
 
 const form = useForm({
     ciudad: '',
@@ -708,6 +599,7 @@ const form = useForm({
     }
 });
 
+// FUNCIÓN: Filtra en tiempo real si el documento elegido es "DNI" o "RUC"
 const limpiarDocumento = (objeto, campoNumero, campoTipo) => {
     if (objeto[campoTipo] === 'DNI') {
         objeto[campoNumero] = objeto[campoNumero].replace(/\D/g, '').slice(0, 8);
@@ -738,30 +630,45 @@ const generarPdf = async () => {
             responseType: 'blob'
         });
         
+        // 1. Determinamos el nombre del cliente según el tipo que seleccionó
         let nombreCliente = 'CLIENTE';
+        
         if (form.tipo_cliente === 'Natural') {
             nombreCliente = form.natural.nombre;
         } else if (form.tipo_cliente === 'Juridica') {
             nombreCliente = form.juridica.nombre_empresa;
         } else if (form.tipo_cliente === 'Copropiedad') {
+            // Si es copropiedad, toma el nombre del primer dueño. Si hay más, le agrega "_Y_OTROS"
             nombreCliente = form.copropiedad.lista[0].nombre;
             if (form.copropiedad.lista.length > 1) {
                 nombreCliente += "_Y_OTROS";
             }
         }
 
+        // 2. Limpiamos el nombre: cambiamos los espacios por guiones bajos y lo pasamos a mayúsculas
+        // Ejemplo: "DIEGO MARCELO" se convierte en "DIEGO_MARCELO"
         const nombreLimpio = nombreCliente.trim().replace(/\s+/g, '_').toUpperCase();
+
+        // 3. Creamos el archivo temporal (blob)
         const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
         
+        // 4. Creamos un enlace (<a>) invisible en la pantalla
         const link = document.createElement('a');
         link.href = url;
+        
+        // 5. Armamos tu nombre de archivo personalizado
         link.setAttribute('download', `CARTAS_PODER_${nombreLimpio}.pdf`); 
         
+        // 6. Simulamos el clic para que inicie la descarga directa y limpiamos
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         
+        // (Opcional) Esta línea además abre el PDF en una pestaña nueva para visualizarlo.
+        // Si SOLO quieres que se descargue, puedes borrarla.
         window.open(url, '_blank');
+
+        // 7. LIMPIAR EL FORMULARIO AUTOMÁTICAMENTE
         form.reset();
 
     } catch (error) {
@@ -777,8 +684,11 @@ const buscarDocumento = async (entidad, campoDoc, campoTipo, campoNombre) => {
     if (tipo === 'DNI' && doc && doc.length === 8) {
         try {
             const respuesta = await axios.get(`/consultar-dni/${doc}`);
+            // 1. Verificamos que success sea true
             if (respuesta.data && respuesta.data.success) {
+                // 2. Quitamos el .data extra porque ahora vienen directos
                 const datos = respuesta.data; 
+                // 3. Usamos los nuevos nombres (apellidoPaterno y apellidoMaterno)
                 entidad[campoNombre] = `${datos.nombres} ${datos.apellidoPaterno} ${datos.apellidoMaterno}`;
             }
         } catch (error) { 
@@ -788,6 +698,7 @@ const buscarDocumento = async (entidad, campoDoc, campoTipo, campoNombre) => {
     else if (tipo === 'RUC' && doc && doc.length === 11) {
         try {
             const respuesta = await axios.get(`/consultar-ruc/${doc}`);
+            // Verificamos directamente si nos devolvió la razonSocial (ya que aquí no mandan "success")
             if (respuesta.data && respuesta.data.razonSocial) {
                 entidad[campoNombre] = respuesta.data.razonSocial;
             }
