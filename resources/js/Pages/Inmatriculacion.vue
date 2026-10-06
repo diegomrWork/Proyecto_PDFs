@@ -358,9 +358,36 @@
                             + Agregar Co-Propietario
                         </button>
 
-                        <div class="mb-4">
-                            <label class="block text-gray-700">Domicilio Principal: DIRECCIÓN + UBIGEO(DEPARTAMENTO - PROVINCIA - DISTRITO)</label>
-                            <input type="text" v-model="form.copropiedad.domicilio" class="w-full border-gray-300 rounded-md shadow-sm" required />
+                        <!-- NUEVO: SELECTORES DINÁMICOS DE UBIGEO PARA CO-PROPIEDAD -->
+                        <div class="mb-4 bg-gray-50 p-4 rounded-md border border-gray-200">
+                            <label class="block text-gray-700 font-bold mb-4">Seleccione Ubigeo del Domicilio Principal:</label>
+                            
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-700 text-sm">Departamento:</label>
+                                    <select v-model="depCopropiedad" @change="cambioDepartamentoCopropiedad" class="w-full border-gray-300 rounded-md shadow-sm text-sm">
+                                        <option value="">Seleccione...</option>
+                                        <option v-for="dep in departamentos" :key="dep" :value="dep">{{ dep }}</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm">Provincia:</label>
+                                    <select v-model="provCopropiedad" @change="cambioProvinciaCopropiedad" :disabled="!depCopropiedad" class="w-full border-gray-300 rounded-md shadow-sm text-sm">
+                                        <option value="">Seleccione...</option>
+                                        <option v-for="prov in provinciasCopropiedad" :key="prov" :value="prov">{{ prov }}</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm">Distrito:</label>
+                                    <select v-model="distCopropiedad" @change="cambioDistritoCopropiedad" :disabled="!provCopropiedad" class="w-full border-gray-300 rounded-md shadow-sm text-sm">
+                                        <option value="">Seleccione...</option>
+                                        <option v-for="dist in distritosCopropiedad" :key="dist" :value="dist">{{ dist }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <label class="block text-gray-700 font-bold">Domicilio Principal: DIRECCIÓN + UBIGEO(DEPARTAMENTO - PROVINCIA - DISTRITO)</label>
+                            <input type="text" v-model="form.copropiedad.domicilio" placeholder="Ej: Av. Larco 123 - LA LIBERTAD - TRUJILLO - TRUJILLO" class="w-full border-gray-300 rounded-md shadow-sm" required />
                         </div>
                     </div>
 
@@ -839,7 +866,7 @@ const ubigeosData = {
             "ANGASMARCA": {}, "CACHICADAN": {}, "MOLLEBAMBA": {}, "MOLLEPATA": {}, "QUIRUVILCA": {}, "SANTA CRUZ DE CHUCA": {}, "SANTIAGO DE CHUCO": {}, "SITABAMBA": {}
         },
         "TRUJILLO": {
-            "EL PORVENIR": {}, "FLORENCIA DE MORA": {}, "HUANCHACO": {}, "LA ESPERANZA": {}, "LAREDO": {}, "MOCHE": {}, "POROTO": {}, "SALAVERRY": {}, "SIMBAL": {}, "TRUJILLO": {}, "VICTOR LARCO HERRERA": {}
+            "EL PORVENIR": {}, "ALTO TRUJILLO": {}, "FLORENCIA DE MORA": {}, "HUANCHACO": {}, "LA ESPERANZA": {}, "LAREDO": {}, "MOCHE": {}, "POROTO": {}, "SALAVERRY": {}, "SIMBAL": {}, "TRUJILLO": {}, "VICTOR LARCO HERRERA": {}
         },
         "VIRU": {
             "CHAO": {}, "GUADALUPITO": {}, "VIRU": {}
@@ -1154,6 +1181,65 @@ const cambioDistrito = () => {
 };
 
 // -----------------------------------
+
+// --- LÓGICA DE UBIGEOS DINÁMICOS (CO-PROPIEDAD) ---
+const depCopropiedad = ref('');
+const provCopropiedad = ref('');
+const distCopropiedad = ref('');
+
+const provinciasCopropiedad = computed(() => {
+    if (depCopropiedad.value && ubigeosData[depCopropiedad.value]) {
+        return Object.keys(ubigeosData[depCopropiedad.value]).sort();
+    }
+    return [];
+});
+
+const distritosCopropiedad = computed(() => {
+    if (provCopropiedad.value && depCopropiedad.value && ubigeosData[depCopropiedad.value][provCopropiedad.value]) {
+        return Object.keys(ubigeosData[depCopropiedad.value][provCopropiedad.value]).sort();
+    }
+    return [];
+});
+
+const actualizarDomicilioCopropiedad = () => {
+    let textoActual = form.copropiedad.domicilio || '';
+    let direccion = '';
+    
+    if (textoActual.includes(' - ')) {
+        direccion = textoActual.substring(0, textoActual.indexOf(' - ')).trim();
+    } else {
+        direccion = textoActual.trim();
+    }
+
+    if (departamentos.value.includes(direccion.toUpperCase())) {
+        direccion = '';
+    }
+
+    let partesUbigeo = [];
+    if (depCopropiedad.value) partesUbigeo.push(depCopropiedad.value);
+    if (provCopropiedad.value) partesUbigeo.push(provCopropiedad.value);
+    if (distCopropiedad.value) partesUbigeo.push(distCopropiedad.value);
+
+    if (partesUbigeo.length > 0) {
+        form.copropiedad.domicilio = (direccion ? direccion + ' - ' : '') + partesUbigeo.join(' - ');
+    }
+};
+
+const cambioDepartamentoCopropiedad = () => {
+    provCopropiedad.value = '';
+    distCopropiedad.value = '';
+    actualizarDomicilioCopropiedad();
+};
+
+const cambioProvinciaCopropiedad = () => {
+    distCopropiedad.value = '';
+    actualizarDomicilioCopropiedad();
+};
+
+const cambioDistritoCopropiedad = () => {
+    actualizarDomicilioCopropiedad();
+};
+// --------------------------------------------------
 
 onMounted(() => {
     const intervalo = setInterval(() => {
