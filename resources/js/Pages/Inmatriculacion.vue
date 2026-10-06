@@ -406,7 +406,7 @@
 
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div>
-                            <label class="block text-gray-700">N° de Serie / Chasis:</label>
+                            <label class="block text-gray-700">N° de  Chasis:</label>
                             <input type="text" 
                                 v-model="form.vehiculo.serie_chasis" 
                                 maxlength="19"
