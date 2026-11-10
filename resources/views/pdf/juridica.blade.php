@@ -74,8 +74,8 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>JOSE MARTIN CHUMAN CASTILLO</span>, con DNI N° 18071209";
             $oficinaRegistral = "CHIMBOTE";
             $zonaRegistral = "ZONA REGISTRAL VII SEDE CHIMBOTE";
-            $apoderadosRegistral = "la Srta. <span class='bold'>PAOLA KATHERINE MORALES GUTIERREZ</span> identificada con DNI N° 71067817, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "la Srta. <span class='bold'>PAOLA KATHERINE MORALES GUTIERREZ</span> identificada con DNI N° 71067817, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "la Srta. <span class='bold'>ELIZETH NUÑUVERO COTRINA</span> identificada con DNI N° 45712400, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "la Srta. <span class='bold'>ELIZETH NUÑUVERO COTRINA</span> identificada con DNI N° 45712400, y/o a __________________________________________ con DNI N° __________________________________________";
 
         } elseif ($ciudadEvaluada === 'HUARAZ') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>ESTELA ALVARADO QUICAÑO</span>, con DNI N° 29351939, y/o <span class='bold'>JOSE MARTIN CHUMAN CASTILLO</span>, con DNI N° 18071209";
@@ -88,8 +88,8 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>CECILIA ELIZABETH RODRIGUEZ ARCE</span>, con DNI N° 45953490, y/o <span class='bold'>JOSE MARTIN CHUMAN CASTILLO</span>, con DNI N° 18071209";
             $oficinaRegistral = "CHIMBOTE";
             $zonaRegistral = "ZONA REGISTRAL VII SEDE CHIMBOTE";
-            $apoderadosRegistral = "la Srta. <span class='bold'>PAOLA KATHERINE MORALES GUTIERREZ</span> identificada con DNI N° 71067817, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "la Srta. <span class='bold'>PAOLA KATHERINE MORALES GUTIERREZ</span> identificada con DNI N° 71067817, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "la Srta. <span class='bold'>ELIZETH NUÑUVERO COTRINA</span> identificada con DNI N° 45712400, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "la Srta. <span class='bold'>ELIZETH NUÑUVERO COTRINA</span> identificada con DNI N° 45712400, y/o a __________________________________________ con DNI N° __________________________________________";
 
         } elseif ($ciudadEvaluada === 'CAJAMARCA') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>IVAN ENRIQUE AMAYA HERNANDEZ</span>, con DNI N° 40311575";
