@@ -102,8 +102,8 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>WILLER WILLIAM MEGO MONTES</span>, con DNI N° 43809537, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
             $oficinaRegistral = "CAJAMARCA";
             $zonaRegistral = "ZONA REGISTRAL II SEDE CHICLAYO";
-            $apoderadosRegistral = "la Srta. <span class='bold'>SANDRA HITAMAR GARCIA NEIRA</span>, identificada con DNI 71218453, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "la Srta. <span class='bold'>SANDRA HITAMAR GARCIA NEIRA</span>, identificada con DNI 71218453, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "el Sr. <span class='bold'>MANUEL JESÚS BARTUREN FONSECA</span>, identificado con DNI 40227317, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "el Sr. <span class='bold'>WILLER WILLIAM MEGO MONTES</span>, identificado con DNI 43809537, y/o <span class='bold'>SISSY ARELI SALINAS CARRASCO</span> identificada con DNI N° 46930632, y/o a __________________________________________ con DNI N° __________________________________________";
             
         } elseif ($ciudadEvaluada === 'TALARA') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>MARIO ALBERTO OLORTIGA ESQUIVEL</span>, con DNI N° 46907962, y/o <span class='bold'>CESAR EDUARDO CUBAS MONTENEGRO</span>, con DNI N° 40640963, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
