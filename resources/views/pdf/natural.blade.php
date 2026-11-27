@@ -95,8 +95,8 @@
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>IVAN ENRIQUE AMAYA HERNANDEZ</span>, con DNI N° 40311575";
             $oficinaRegistral = "CAJAMARCA";
             $zonaRegistral = "ZONA REGISTRAL II SEDE CHICLAYO";
-            $apoderadosRegistral = "<span class='bold'>SUSANA PATRICIA ALCANTARA AMBROSIO</span>, identificada con DNI 41317425, y/o a __________________________________________ con DNI N° __________________________________________";
-            $apoderadosAAP = "<span class='bold'>SUSANA PATRICIA ALCANTARA AMBROSIO</span>, identificada con DNI 41317425, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosRegistral = "<span class='bold'>SUSANA PATRICIA ALCANTARA AMBROSIO</span>, identificada con DNI 41317425, y/o a <span class='bold'>INGRID JANETH GRANDA CAUCHA</span> identificada con DNI N° 75240542, y/o a __________________________________________ con DNI N° __________________________________________";
+            $apoderadosAAP = "<span class='bold'>SUSANA PATRICIA ALCANTARA AMBROSIO</span>, identificada con DNI 41317425, y/o a <span class='bold'>LEIDA MALCA ROMERO</span> identificada con DNI N° 47393731, y/o a __________________________________________ con DNI N° __________________________________________";
             
         } elseif ($ciudadEvaluada === 'JAÉN') {
             $itfNormalCiudad = "<span class='bold'>MILAGROS YESENIA MIRANDA ZAVALA</span>, con DNI N° 44550672, y/o <span class='bold'>WILLER WILLIAM MEGO MONTES</span>, con DNI N° 43809537, y/o <span class='bold'>MARGARITA RAFAELA NECIOSUP ALVAREZ</span>, con DNI N° 17911510";
